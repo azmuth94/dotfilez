@@ -1,30 +1,36 @@
-execute pathogen#infect()
+call plug#begin()
+Plug 'scrooloose/nerdtree'
+Plug 'pangloss/vim-javascript'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-commentary'
+call plug#end()
 
-" Auto Commands
-autocmd vimenter * NERDTree  
-
-nmap 0 ^
-
-" Map Ctrl-s to write the file
-nmap <C-s> :w<cr>
+" Plugin Configurations
+syntax on 
+let g:javascript_plugin_jsdoc = 1 " Enables syntax highlighting for js docs
+let g:javascript_plugin_flow = 1  " Enables syntax highlighting for flow
+let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""' 
+let g:ctrlp_use_caching = 0
 
 " Use the space key as our leader. Put this near the top of your vimrc
 let mapleader = "\<Space>"
-
-" Split edit your vimrc. Type space, v, r in sequence to trigger
-nmap <leader>vr :sp $MYVIMRC<CR>
-
-" Source (reload) your vimrc. Type space, s, o in sequence to trigger
-nmap <leader>so :source $MYVIMRC<CR>
-
+map <leader>vr :sp $MYVIMRC<CR> 
+map <leader>so :source $MYVIMRC<CR>
 map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>sc :sp db/schema.rb<CR>
-
+map <leader>vr :sp $MYVIMRC<CR> 
+map <leader>so :source $MYVIMRC<CR>
+map <Leader>t :w<cr>:call RunCurrentSpecFile()<CR>
+map <C-t> <esc>:tabnew<CR>
+map <C-x> <C-w>c
+map 0 ^
 imap jk <esc>
 imap kj <esc>
 imap <C-s> <esc>:w<CR>
-map <C-t> <esc>:tabnew<CR>
-map <C-x> <C-w>c
 
 set number                      " Display line numbers beside buffer
 set nocompatible                " Don't maintain compatibilty with Vi.
@@ -40,3 +46,8 @@ set mouse=a
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+
+
+" Auto Commands
+autocmd vimenter * NERDTree  
+
